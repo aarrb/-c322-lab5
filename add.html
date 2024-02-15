@@ -23,8 +23,21 @@
         let duckType = document.getElementById("type").value;
         let duck = { id: duckId, type: duckType };
         console.log("You entered:" + JSON.stringify(duck));
-
-        //TODO
+         let request = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(duck)
+        };
+        let response = await fetch(host + "/ducks", request);
+        if (response.status == 200) {
+          message = "The duck was added successfully!";
+        } else {
+          console.log(response);
+          message = "Something went wrong! Duck data could not be saved.";
+        }
+        alert(message);
       }
     </script>
   </body>
